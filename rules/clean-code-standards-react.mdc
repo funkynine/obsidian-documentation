@@ -1,0 +1,118 @@
+---
+description: Clean code standards — SOLID, components, imports, best practices
+globs: "**/*.{ts,tsx,js,jsx}"
+alwaysApply: true
+---
+
+# Clean Code Standards
+
+## General Principles
+
+- **Clarity and readability**: Code should be readable and self-documenting. Name variables, functions, and components clearly and unambiguously.
+- **Separation of concerns**: Split code into components, hooks, services, utilities. One module — one area of responsibility.
+- **SOLID**: Follow SOLID when it does not overcomplicate the code. Pragmatism over dogma.
+- **No deprecated**: Do not use deprecated methods or APIs. Check official documentation.
+- **Best practices**: Apply recommended practices for the project stack (React, NestJS, TypeScript, etc.).
+
+## Code Structure
+
+### Components
+- Extract distinct UI parts into components with clear names.
+- Components should be small (up to ~150–200 lines). If larger — split or extract logic into a hook.
+
+### Logic
+- Hooks — for logic and state.
+- Services / utilities — for business logic, API, data processing.
+- Constants and config — separate.
+
+## Libraries and API Currency
+
+**When to use Context7 MCP (user-context7):**
+- Method or API does not exist, TypeScript/IDE shows an error.
+- Doubts about syntax or signature currency.
+- Library version changed and migration needs verification.
+- Need up-to-date examples from official docs.
+
+**Token balance:**
+- Call Context7 only when truly needed (not for every routine edit).
+- First — `resolve-library-id`, then — `query-docs` with a specific query.
+- No more than 3 `query-docs` calls per task.
+
+## Import Ordering
+
+Use this order (top to bottom):
+
+1. **External packages** (React, libraries) — alphabetical
+2. **Blank line**
+3. **Internal absolute paths** (`@/` or `src/`) — by type: components, hooks, lib, utils, types
+4. **Relative imports** (`.` / `..`) — same principle
+
+```typescript
+// 1. External
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+// 2. Blank line
+// 3. Internal
+import { Button } from '@/components/ui/button';
+import { useAuth } from '@/hooks/api/auth/useAuth';
+import { apiClient } from '@/lib/api-client';
+
+// 4. Relative (if any)
+import { formatDate } from './utils';
+```
+
+## Examples
+
+### Bad vs Good
+
+```typescript
+// ❌ Bad: large component, mixed logic
+function Page() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch('/api/items').then(response => response.json()).then(setData);
+  }, []);
+  return <div>{/* 200 lines of JSX */}</div>;
+}
+
+// ✅ Good: separation into hook and component
+function useItems() {
+  return useQuery({ queryKey: ['items'], queryFn: () => api.getItems() });
+}
+function Page() {
+  const { data } = useItems();
+  return <ItemsList items={data} />;
+}
+```
+
+```typescript
+// ❌ Bad: unordered imports
+import { formatDate } from './utils';
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+
+// ✅ Good: grouped and ordered
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { useAuth } from '@/hooks/useAuth';
+import { formatDate } from './utils';
+```
+
+## Comments
+
+- **Language**: Always in English.
+- **Only when needed**: Write comments only for complex/unusual functionality that is not obvious from the code.
+- **Don't describe everything**: Don't comment obvious things. Code explains "what"; comment explains "why" or unusual context.
+- **Avoid redundancy**: A comment like `// sets the value` above `setValue(x)` is pointless.
+
+## Additional Rules
+
+- **Naming**: camelCase for variables and functions, PascalCase for components and types.
+  - Never name variables with a single letter (`i`, `e`, `r`, `x`, etc.).
+  - Variable names must be understandable: it should be clear from the name what is stored or what the function does.
+- **Types**: Minimize `any`; use generics where appropriate.
+- **Errors**: Handle errors explicitly; don't ignore `catch`.
+- **Magic values**: Extract numbers and strings into constants with clear names.
+- **DRY**: Don't duplicate logic; extract repeated code into hooks/functions.
