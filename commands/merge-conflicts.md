@@ -1,0 +1,1 @@
+Run merge-conflict-resolver skill: ask which branch to merge (default: dev), run merge, auto-resolve simple conflicts, leave ambiguous ones with REVIEW comments for manual resolution. Don't run on main/master/development/dev.
