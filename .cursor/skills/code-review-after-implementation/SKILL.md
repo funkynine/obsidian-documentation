@@ -5,7 +5,7 @@ description: Use when completing tasks, implementing major features, or before m
 
 # Requesting Code Review
 
-Dispatch superpowers:code-reviewer subagent to catch issues before they cascade.
+Invoke the **code-reviewer** subagent (from `.cursor/agents/code-reviewer.md`) to review current changes. Use this for a one-off review without running the full `/implement` pipeline.
 
 **Core principle:** Review early, review often.
 
@@ -23,56 +23,30 @@ Dispatch superpowers:code-reviewer subagent to catch issues before they cascade.
 
 ## How to Request
 
-**1. Get git SHAs:**
+**1. Get the diff to review:**
 ```bash
-BASE_SHA=$(git rev-parse HEAD~1)  # or origin/main
-HEAD_SHA=$(git rev-parse HEAD)
+# Option A: last commit vs current
+git diff HEAD~1..HEAD
+
+# Option B: vs branch (e.g. main)
+git diff origin/main..HEAD
 ```
 
-**2. Dispatch code-reviewer subagent:**
+**2. Invoke the code-reviewer subagent**
 
-Use Task tool with superpowers:code-reviewer type, fill template at `code-reviewer.md`
+Call the **code-reviewer** subagent and pass:
 
-**Placeholders:**
-- `{WHAT_WAS_IMPLEMENTED}` - What you just built
-- `{PLAN_OR_REQUIREMENTS}` - What it should do
-- `{BASE_SHA}` - Starting commit
-- `{HEAD_SHA}` - Ending commit
-- `{DESCRIPTION}` - Brief summary
+- **What was implemented** — short description of the change
+- **Plan/requirements** — what it should do (if any)
+- **The diff** — output of `git diff` for the range you care about
+
+The code-reviewer will return feedback in: Critical (must fix) / Warnings (should fix) / Suggestions (consider).
 
 **3. Act on feedback:**
 - Fix Critical issues immediately
-- Fix Important issues before proceeding
-- Note Minor issues for later
+- Fix Important/Warnings before proceeding
+- Note Minor/Suggestions for later
 - Push back if reviewer is wrong (with reasoning)
-
-## Example
-
-```
-[Just completed Task 2: Add verification function]
-
-You: Let me request code review before proceeding.
-
-BASE_SHA=$(git log --oneline | grep "Task 1" | head -1 | awk '{print $1}')
-HEAD_SHA=$(git rev-parse HEAD)
-
-[Dispatch superpowers:code-reviewer subagent]
-  WHAT_WAS_IMPLEMENTED: Verification and repair functions for conversation index
-  PLAN_OR_REQUIREMENTS: Task 2 from docs/plans/deployment-plan.md
-  BASE_SHA: a7981ec
-  HEAD_SHA: 3df7661
-  DESCRIPTION: Added verifyIndex() and repairIndex() with 4 issue types
-
-[Subagent returns]:
-  Strengths: Clean architecture, real tests
-  Issues:
-    Important: Missing progress indicators
-    Minor: Magic number (100) for reporting interval
-  Assessment: Ready to proceed
-
-You: [Fix progress indicators]
-[Continue to Task 3]
-```
 
 ## Integration with Workflows
 
@@ -82,7 +56,7 @@ You: [Fix progress indicators]
 - Fix before moving to next task
 
 **Executing Plans:**
-- Review after each batch (3 tasks)
+- Review after each batch (e.g. 3 tasks)
 - Get feedback, apply, continue
 
 **Ad-Hoc Development:**
@@ -102,4 +76,6 @@ You: [Fix progress indicators]
 - Show code/tests that prove it works
 - Request clarification
 
-See template at: requesting-code-review/code-reviewer.md
+## Optional reference
+
+For a detailed checklist and output format the reviewer can follow, see [code-reviewer.md](code-reviewer.md). The subagent in `.cursor/agents/code-reviewer.md` already defines its own workflow; use this file only as a reference for scope (quality, architecture, testing, production readiness).

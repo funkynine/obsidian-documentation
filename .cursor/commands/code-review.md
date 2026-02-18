@@ -1,1 +1,1 @@
-run code-review-after-implementation skill
+Запусти **code-reviewer** сабагента для поточних змін: покажи git diff (наприклад `HEAD~1..HEAD` або `origin/main..HEAD`), передай коротко що зроблено і що має робити, отримай feedback у форматі Critical / Warnings / Suggestions.
