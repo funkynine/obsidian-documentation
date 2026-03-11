@@ -29,11 +29,11 @@ When the user invokes **debug mode** (e.g. says "debug mode", "run debug mode", 
 You can offer a short template for the user to fill:
 
 ```
-• Problem: 
-• Where: 
-• Steps to reproduce: 
-• Errors / what you see: 
-• Environment: 
+• Problem:
+• Where:
+• Steps to reproduce:
+• Errors / what you see:
+• Environment:
 ```
 
 **Only after** the user has provided at least (1) and (3)—problem and steps—proceed to the workflow (Understand and Reproduce). If something is missing but you can infer it (e.g. dev URL from the project), you may start reproduction and ask the rest in parallel.
@@ -82,11 +82,20 @@ If the bug might be due to wrong or outdated API usage:
 - Follow project and library best practices (error handling, types, no `any` unless justified).
 - **No hacks:** no permanent `try/catch` that swallows errors, no disabling validations, no “fix later” comments.
 
-### 5. Verify in the Browser
+### 5. Post-Implementation Testing with Chrome DevTools
 
-- **DevTools:** Reload or navigate again, repeat the same steps that previously caused the bug.
-- Confirm: bug is gone, no new console errors, relevant flows still work.
-- If the bug persists, use **sequential thinking** to revise the hypothesis (e.g. wrong layer, wrong assumption) and iterate.
+After implementing the fix, use Chrome DevTools to run a **full verification pass** before declaring the bug resolved. This is mandatory — do not skip.
+
+**Steps:**
+
+1. **Reload the app** — `navigate_page` with `type: "reload"` to pick up the latest code changes.
+2. **Reproduce the original steps** — Perform the exact same steps that previously triggered the bug.
+3. **Check console** — `list_console_messages` filtered by error/warning; confirm no new or remaining errors.
+4. **Check network** — `list_network_requests` for any failed requests related to the fix.
+5. **Take a screenshot or snapshot** — Capture the working state as confirmation.
+6. **Smoke-test adjacent flows** — Briefly exercise 1–2 related user paths (e.g. if you fixed login, also check logout) to ensure nothing regressed.
+
+If the bug persists after these steps, use **sequential thinking** to revise the hypothesis (e.g. wrong layer, wrong assumption) and iterate from Step 2.
 
 ### 6. Deliver the Solution
 
@@ -99,11 +108,11 @@ If the bug might be due to wrong or outdated API usage:
 
 Use the `sequentialthinking` tool in short, focused chains (about 3–6 thoughts per use):
 
-| Stage              | Use for                                                                 | Revisions |
-|--------------------|-------------------------------------------------------------------------|-----------|
-| After reproduce    | List symptoms → likely causes → next check (console/network/code).     | Yes, when console/network give new data. |
-| After hypothesis   | Observed behavior → 2–3 causes → chosen cause and why.                  | Yes, when first fix doesn’t work. |
-| When stuck         | What we tried → why it didn’t help → alternative cause or layer.        | Yes, as new clues appear. |
+| Stage            | Use for                                                            | Revisions                                |
+| ---------------- | ------------------------------------------------------------------ | ---------------------------------------- |
+| After reproduce  | List symptoms → likely causes → next check (console/network/code). | Yes, when console/network give new data. |
+| After hypothesis | Observed behavior → 2–3 causes → chosen cause and why.             | Yes, when first fix doesn’t work.        |
+| When stuck       | What we tried → why it didn’t help → alternative cause or layer.   | Yes, as new clues appear.                |
 
 Keep each chain tied to one decision (e.g. “what to inspect next” or “which hypothesis to test first”).
 
@@ -113,15 +122,15 @@ Keep each chain tied to one decision (e.g. “what to inspect next” or “whic
 
 Use the browser to **reproduce** and **verify**; avoid fixing blindly. DevTools can also **inspect and interact with the DOM** (read elements, run JS in the page, check state).
 
-| Goal              | Tools to use |
-|-------------------|--------------|
-| Open app          | `new_page`, `navigate_page` |
-| User actions      | `click`, `fill`, `fill_form`, `press_key` |
-| See state         | `take_snapshot`, `take_screenshot` |
+| Goal              | Tools to use                                                                                                   |
+| ----------------- | -------------------------------------------------------------------------------------------------------------- |
+| Open app          | `new_page`, `navigate_page`                                                                                    |
+| User actions      | `click`, `fill`, `fill_form`, `press_key`                                                                      |
+| See state         | `take_snapshot`, `take_screenshot`                                                                             |
 | DOM               | `take_snapshot` (a11y tree + element `uid`), `evaluate_script` (run JS in page context to read or inspect DOM) |
-| Errors            | `list_console_messages` (filter by error), `get_console_message` |
-| Network           | `list_network_requests`, `get_network_request` for failed or relevant URLs |
-| After code change | Reload (`navigate_page` with `type: "reload"`) then repeat repro steps |
+| Errors            | `list_console_messages` (filter by error), `get_console_message`                                               |
+| Network           | `list_network_requests`, `get_network_request` for failed or relevant URLs                                     |
+| After code change | Reload (`navigate_page` with `type: "reload"`) then repeat repro steps                                         |
 
 Reproduce the bug once, then after each fix run the same steps again and confirm success.
 
@@ -151,7 +160,7 @@ Reproduce the bug once, then after each fix run the same steps again and confirm
 - [ ] Console/network inspected; hypothesis formed (sequential thinking if useful).
 - [ ] Context7 used when API/library usage might be wrong or outdated.
 - [ ] Fix is minimal, follows best practices, no workarounds.
-- [ ] Fix verified in browser: same steps, bug gone, no new errors.
+- [ ] Fix verified in browser via Chrome DevTools: reload, same repro steps, bug gone, no new console/network errors, adjacent flows smoke-tested.
 - [ ] User gets a short summary and, if useful, a regression check to run.
 
 ## Additional resources
