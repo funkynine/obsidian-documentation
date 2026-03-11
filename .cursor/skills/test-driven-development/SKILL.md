@@ -21,6 +21,8 @@ Write the test first. Watch it fail. Write minimal code to pass.
 - Refactoring
 - Behavior changes
 
+**Optional — project context:** When you need API surface, routes, or structure to write tests, consider loading project docs from Obsidian (**obsidian-project-context** skill or `.cursor/obsidian-docs-path`) so you don’t re-scan the whole codebase; use `api-surface.md` or `agent-context.md` as needed.
+
 **Exceptions (ask your human partner):**
 - Throwaway prototypes
 - Generated code

@@ -24,12 +24,14 @@ User (task/bug/feature)
 ### 1. Planner
 
 - **Input**: User request (task, bug, feature — anything they want done).
+- **Optional**: If the project has Obsidian docs (see **obsidian-project-context** skill or `.cursor/obsidian-docs-path`), load `agent-context.md` or `architecture.md` and pass relevant context to the planner so the plan aligns with existing structure and API.
 - **Action**: Invoke the **planner** subagent. Planner creates a plan and breaks it into tasks.
 - **Handoff**: Pass the plan (and first implementation task) to **programmer**.
 
 ### 2. Programmer
 
 - **Input**: Plan and task(s) from planner.
+- **Optional**: If project Obsidian docs exist, programmer can use them (e.g. **obsidian-project-context** — critical files, conventions, API surface) to avoid re-scanning the codebase.
 - **Action**: Invoke the **programmer** subagent. Programmer implements according to the plan.
 - **Handoff**: When implementation is done, pass the result and “what to verify” to **tester**.
 

@@ -79,3 +79,5 @@ The code-reviewer will return feedback in: Critical (must fix) / Warnings (shoul
 ## Optional reference
 
 For a detailed checklist and output format the reviewer can follow, see [code-reviewer.md](code-reviewer.md). The subagent in `.cursor/agents/code-reviewer.md` already defines its own workflow; use this file only as a reference for scope (quality, architecture, testing, production readiness).
+
+**Project conventions / architecture:** If the project has Obsidian docs (**.cursor/obsidian-docs-path** or **obsidian-project-context** skill), the reviewer can optionally load `conventions.md` or `architecture.md` to check alignment with documented patterns.

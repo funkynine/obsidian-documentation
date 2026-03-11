@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## When Information Is Insufficient
 
-If there is not enough context for confident implementation, **do not guess**. Do one of two things:
+If there is not enough context for confident implementation, **do not guess**. Optionally check project docs first (Obsidian folder path in `.cursor/obsidian-docs-path` — read `agent-context.md` or relevant notes). Then do one of two things:
 
 1. **Ask additional questions** — clarify with one or more questions:
    - What exactly is needed (desired behavior, outcome)

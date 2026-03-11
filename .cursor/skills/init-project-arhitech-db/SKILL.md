@@ -261,3 +261,5 @@ When analyzing, use tools in this order (first available wins):
 
 - `references/templates.md` — Obsidian file templates for each document type
 - `references/mermaid-patterns.md` — Mermaid diagram patterns for architecture, dep graphs
+
+**Downstream use:** The docs produced by this skill are consumed by the **obsidian-project-context** skill: agents can read from this folder (path in `.cursor/obsidian-docs-path`) for architecture, API, features, and conventions instead of re-analyzing the codebase.

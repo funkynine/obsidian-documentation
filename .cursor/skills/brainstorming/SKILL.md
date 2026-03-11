@@ -16,7 +16,7 @@ Start by understanding the current project context, then ask questions one at a 
 ## The Process
 
 **Understanding the idea:**
-- Check out the current project state first (files, docs, recent commits)
+- Check out the current project state first (files, docs, recent commits). *Optional:* if the project has Obsidian docs (**.cursor/obsidian-docs-path** or **obsidian-project-context**), read `agent-context.md` or `features.md` for architecture and existing features before asking questions.
 - *Optional — sequential thinking:* use it to break down the idea into: purpose, constraints, success criteria, unknowns; then derive the next question from the most important gap
 - Ask questions one at a time to refine the idea
 - Prefer multiple choice questions when possible, but open-ended is fine too

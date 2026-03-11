@@ -32,7 +32,7 @@ Add to the plan: “Watch out for X” and “Ensure Y” so programmer and desi
 
 ## Workflow when invoked
 
-1. **Clarify**: Understand the feature goal, constraints, and current codebase (or ask for context).
+1. **Clarify**: Understand the feature goal, constraints, and current codebase (or ask for context). *Optional:* if the project has Obsidian docs (path in `.cursor/obsidian-docs-path`), read `agent-context.md` or `architecture.md` for existing structure and API before planning.
 2. **Structure**: Use sequential-thinking MCP to build a step-by-step plan and task list.
 3. **Task breakdown**: For each step, define small tasks with owner (e.g. programmer, designer), inputs, and done criteria.
 4. **Risks**: List edge cases and mitigations; attach them to relevant tasks.
