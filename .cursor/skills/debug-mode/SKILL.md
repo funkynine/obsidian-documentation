@@ -12,6 +12,7 @@ When a bug or problem is hard to pin down, follow this workflow. Use **sequentia
 - **Sequential-thinking MCP** — for step-by-step reasoning and revising hypotheses.
 - **Chrome DevTools MCP** — for opening the app, reproducing the bug, inspecting console/network, working with the DOM, and verifying the fix.
 - **Context7 MCP** — when the issue may involve library/framework API changes or unclear current usage.
+- **Authenticated test user (when needed)** — for bugs that occur only for logged-in users in this project, first obtain an authenticated session using the `project-login` skill before reproducing the issue.
 
 ## Debug mode command
 
@@ -55,7 +56,8 @@ You can offer a short template for the user to fill:
 - **Gather context:** What exactly happens? When? (user steps, URL, input.) Any console/network errors the user saw?
 - **Sequential thinking (optional):** Use a short chain to list: symptoms, likely areas (frontend/API/config), and what to check first.
 - **Reproduce with DevTools:**
-  - Open the app (e.g. `new_page` or `navigate_page` to the dev URL).
+  - If the bug requires a logged-in user for this project, first use the `project-login` skill to log in as the configured test account.
+  - Open the app (e.g. `new_page` or `navigate_page` to the dev URL or target page).
   - Perform the steps that trigger the bug.
   - Capture **console** (`list_console_messages`, `get_console_message` for errors) and **network** (`list_network_requests`, `get_network_request` for failed or relevant requests).
   - Take a **snapshot** or **screenshot** of the broken state if it helps.

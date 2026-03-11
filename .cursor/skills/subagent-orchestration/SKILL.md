@@ -37,6 +37,7 @@ User (task/bug/feature)
 
 - **Input**: What was implemented and what should be verified.
 - **Action**: Invoke the **tester** subagent. Tester runs checks (e.g. Playwright, Chrome DevTools) and confirms if it works.
+  - For this project, when a scenario requires a logged-in user and uses Chrome DevTools MCP, the tester should first establish an authenticated session by using the `project-login` skill, then run the rest of the steps.
 - **If it does not work**: Tester leaves a **comment** for the programmer (what’s wrong, steps, context). Hand back to **programmer** with that comment. Repeat until tests pass.
 - **If it works**: Proceed to **code-reviewer**.
 

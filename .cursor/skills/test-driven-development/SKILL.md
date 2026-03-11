@@ -354,6 +354,11 @@ Bug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix 
 
 Never fix bugs without a test.
 
+For browser-based bugs in this project that occur only for an authenticated user, structure tests and reproduction steps so that:
+
+- The test (or tester subagent) first ensures a logged-in session using the `project-login` skill (Chrome DevTools MCP).
+- Only then does it navigate to the target page and perform the steps that reproduce the bug.
+
 ## Testing Anti-Patterns
 
 When adding mocks or test utilities, read @testing-anti-patterns.md to avoid common pitfalls:
