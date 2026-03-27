@@ -1,6 +1,6 @@
 ---
 name: project-login
-description: "Use before running Chrome DevTools MCP tests that require an authenticated user. Opens the app, logs in with the configured test account, and verifies login succeeded."
+description: "Use before browser tests that require an authenticated user. Opens the app, logs in with the configured test account via Playwright MCP, and verifies login succeeded."
 ---
 
 # Project login (authenticated browser session)
@@ -64,13 +64,13 @@ Update these selectors to match the actual login page:
 
 If you do not know the selectors, use DevTools MCP (`take_snapshot`, `evaluate_script`) to inspect the login form and adjust the selectors accordingly.
 
-## Login flow with Chrome DevTools MCP
+## Login flow with Playwright MCP
 
-When you need an authenticated session for this project, perform the following steps with the **Chrome DevTools MCP**:
+When you need an authenticated session for this project, perform the following steps with the **Playwright MCP**:
 
 1. **Open the login page**
    - Decide which site to use (for example by `baseUrl` in `credentials.local.mdc`).
-   - Use `new_page` or `navigate_page` to go to: `<baseUrl><loginPath>` from the chosen site entry.
+   - Use Playwright MCP navigation tools to go to: `<baseUrl><loginPath>` from the chosen site entry.
    - Wait until the login form is visible (for example wait for `EMAIL_SELECTOR`).
 
 2. **Fill credentials**
