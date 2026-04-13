@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Pre-push: dev/development only — queue + Obsidian sync scripts (log + code snapshot).
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+cd "$repo_root"
+
+refs_content=""
+if [ -t 0 ]; then
+  refs_content=""
+else
+  refs_content=$(cat || true)
+fi
+
+match_dev=0
+
+if [[ -n "${refs_content// }" ]]; then
+  while IFS= read -r line || [[ -n "${line:-}" ]]; do
+    [[ -z "${line// }" ]] && continue
+    local_ref=""
+    remote_ref=""
+    read -r local_ref _local_sha remote_ref _remote_sha <<<"$line" || true
+    case "$local_ref" in
+      refs/heads/dev|refs/heads/development) match_dev=1 ;;
+    esac
+    case "$remote_ref" in
+      refs/heads/dev|refs/heads/development) match_dev=1 ;;
+    esac
+  done <<<"$refs_content"
+else
+  branch_name="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")"
+  if [[ "$branch_name" == "dev" || "$branch_name" == "development" ]]; then
+    match_dev=1
+  fi
+fi
+
+if [[ "$match_dev" -eq 0 ]]; then
+  exit 0
+fi
+
+branch_name="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")"
+current_sha="$(git rev-parse HEAD 2>/dev/null || echo "unknown")"
+previous_sha="$(git rev-parse HEAD~1 2>/dev/null || echo "$current_sha")"
+timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+mkdir -p .cursor
+printf '%s\t%s\t%s\t%s\t%s\n' \
+  "$timestamp" \
+  "push" \
+  "$branch_name" \
+  "$previous_sha" \
+  "$current_sha" >>.cursor/obsidian-sync-queue.log
+
+sync_script="${repo_root}/scripts/obsidian-sync-on-push.sh"
+if [[ -f "$sync_script" ]]; then
+  bash "$sync_script" || true
+fi

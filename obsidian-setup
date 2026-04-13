@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Wrapper: run from anywhere — forwards to scripts/obsidian-setup.sh
+exec "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/scripts/obsidian-setup.sh" "$@"

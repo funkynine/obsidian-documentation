@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "hooks": {
+    "afterShellExecution": [
+      {
+        "command": ".cursor/hooks/on-merge-development.sh",
+        "matcher": "^git\\s+merge\\s+(development|dev)(\\s|$)"
+      }
+    ]
+  }
+}

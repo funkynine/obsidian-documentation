@@ -42,3 +42,8 @@ next-env.d.ts
 
 # supabase
 supabase/.temp/
+
+# Local Obsidian bootstrap (do not commit machine paths)
+.cursor/documentation-obsidian/
+.cursor/obsidian-docs-path
+.cursor/obsidian-sync-queue.log
