@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2
+
+- Added marketplace metadata (`homepage`, `repository`, `logo`) to `.cursor-plugin/plugin.json`.
+- Added plugin icon at `.cursor-plugin/assets/logo.svg`.
+- Prepared release metadata for publishing to `funkynine/obsidian-documentation`.
+
 ## 0.2.1
 
 - Synced `init-project-arhitech-db` and `obsidian-project-context` skills from `ai-template` (parity with upstream).

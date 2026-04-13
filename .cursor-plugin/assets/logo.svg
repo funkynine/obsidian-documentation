@@ -1,0 +1,18 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="96" fill="#0E1117"/>
+  <rect x="136" y="104" width="240" height="304" rx="28" fill="#161B22" stroke="#2C3340" stroke-width="8"/>
+  <path d="M296 104V176C296 188.15 305.85 198 318 198H376" stroke="#2C3340" stroke-width="8"/>
+  <path d="M288 104L376 192" stroke="#2C3340" stroke-width="8"/>
+  <path d="M220 154L184 218L222 306L266 324L306 300L324 214L288 154L254 120L220 154Z" fill="url(#gradCrystal)"/>
+  <path d="M222 306L254 220L306 300L266 324L222 306Z" fill="#7B61FF" fill-opacity="0.55"/>
+  <path d="M184 218L254 220L220 154L184 218Z" fill="#4DD2FF" fill-opacity="0.45"/>
+  <path d="M352 258C372.4 258 389 274.6 389 295C389 315.4 372.4 332 352 332" stroke="#4DD2FF" stroke-width="12" stroke-linecap="round"/>
+  <path d="M160 258C139.6 258 123 274.6 123 295C123 315.4 139.6 332 160 332" stroke="#7B61FF" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="256" cy="364" r="12" fill="#4DD2FF"/>
+  <defs>
+    <linearGradient id="gradCrystal" x1="184" y1="120" x2="332" y2="324" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4DD2FF"/>
+      <stop offset="1" stop-color="#7B61FF"/>
+    </linearGradient>
+  </defs>
+</svg>

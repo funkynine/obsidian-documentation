@@ -1,10 +1,12 @@
 {
   "name": "documentation-obsidian",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Obsidian documentation pipeline: init-project docs, dev-branch push sync, vault issue library, and AI /obsidian-sync. Includes scripts and git hooks for any terminal.",
   "author": {
     "name": "Ihor Bazyliuk"
   },
+  "homepage": "https://github.com/funkynine/obsidian-documentation",
+  "repository": "https://github.com/funkynine/obsidian-documentation",
   "license": "MIT",
   "keywords": [
     "obsidian",
@@ -13,6 +15,7 @@
     "cursor-skills",
     "git-hooks"
   ],
+  "logo": ".cursor-plugin/assets/logo.svg",
   "skills": ".cursor/skills",
   "commands": ".cursor/commands"
 }
