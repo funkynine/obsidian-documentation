@@ -1,6 +1,6 @@
 {
   "name": "documentation-obsidian",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Obsidian documentation pipeline: init-project docs, dev-branch push sync, vault issue library, and AI /obsidian-sync. Includes scripts and git hooks for any terminal.",
   "author": {
     "name": "Ihor Bazyliuk"
@@ -16,6 +16,6 @@
     "git-hooks"
   ],
   "logo": ".cursor-plugin/assets/logo.svg",
-  "skills": ".cursor/skills",
-  "commands": ".cursor/commands"
+  "skills": "./skills",
+  "commands": "./commands"
 }

@@ -1,6 +1,6 @@
 {
   "name": "documentation-obsidian",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Obsidian documentation pipeline for Claude: init project docs, sync on delivery events, and maintain reusable issue-solution knowledge.",
   "author": {
     "name": "Ihor Bazyliuk"
@@ -14,5 +14,11 @@
     "architecture",
     "claude-plugin",
     "git-hooks"
+  ],
+  "commands": [
+    "./commands/obsidian-setup.md",
+    "./commands/init-project-db.md",
+    "./commands/obsidian-sync.md",
+    "./commands/obsidian-history.md"
   ]
 }

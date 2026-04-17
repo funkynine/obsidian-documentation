@@ -1,5 +1,5 @@
 ---
-name: nx-obsidian-docs
+name: init-project-arhitech-db
 description: >
   Analyzes a software project (Nx monorepo or any JS/TS project) and generates structured
   agent-ready documentation, saving it as an organized folder in Obsidian vault. Use this
@@ -11,7 +11,7 @@ description: >
   project", or "analyze project structure".
 ---
 
-# nx-obsidian-docs
+# init-project-arhitech-db
 
 Analyzes a software project and creates a rich, agent-ready documentation folder in Obsidian. Works with Nx monorepos (via Nx MCP) or any JS/TS project (via filesystem analysis).
 
