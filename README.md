@@ -7,6 +7,8 @@ It combines skills, commands, and git hooks so AI can:
 - keep history after push/merge,
 - build reusable issue-solution knowledge across projects.
 
+This repository now includes both Cursor and Claude-compatible entrypoints that share the same scripts, hooks, and `.cursor` data files.
+
 ## Included commands
 
 - `/obsidian-setup` - one-time setup in a project.
@@ -15,12 +17,26 @@ It combines skills, commands, and git hooks so AI can:
 - `/obsidian-sync-pending` - process only queued events.
 - `/obsidian-history` - refresh history/decisions/issues notes.
 
+Claude command specs live in:
+
+- `.claude/commands/obsidian-setup.md`
+- `.claude/commands/init-project-db.md`
+- `.claude/commands/obsidian-sync.md`
+- `.claude/commands/obsidian-history.md`
+
 ## Included skills
 
 - `init-project-arhitech-db`
 - `obsidian-project-context`
 - `obsidian-auto-sync`
 - `obsidian-issue-library`
+
+Claude skill wrappers live in:
+
+- `.claude/skills/init-project-arhitech-db/SKILL.md`
+- `.claude/skills/obsidian-project-context/SKILL.md`
+- `.claude/skills/obsidian-auto-sync/SKILL.md`
+- `.claude/skills/obsidian-issue-library/SKILL.md`
 
 ## Obsidian path policy
 
@@ -48,6 +64,37 @@ Then in Cursor run:
 After that:
 - push to `dev` or `development` to enqueue sync events automatically,
 - run `/obsidian-sync` to update Obsidian notes.
+
+## Claude usage
+
+Claude-compatible plugin metadata is in:
+
+- `.claude-plugin/plugin.json`
+- `.mcp.json`
+
+The Claude wrappers intentionally keep these canonical files:
+
+- `.cursor/obsidian-docs-path`
+- `.cursor/obsidian-sync-queue.log`
+
+This avoids split state between Cursor and Claude when both are used on the same repository.
+
+## Publish for Claude (GitHub path)
+
+Recommended distribution flow:
+
+1. Keep plugin metadata current in `.claude-plugin/plugin.json` (`name`, `version`, `description`, `repository`).
+2. Commit changes and push to GitHub.
+3. Install from repo id:
+
+```bash
+npx plugins add <owner>/<repo>
+```
+
+4. After each update:
+   - bump `version` in `.claude-plugin/plugin.json`,
+   - push commit/tag,
+   - reload/refresh plugins in Claude environment.
 
 ## What setup script installs
 

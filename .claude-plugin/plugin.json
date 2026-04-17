@@ -1,0 +1,18 @@
+{
+  "name": "documentation-obsidian",
+  "version": "0.2.2",
+  "description": "Obsidian documentation pipeline for Claude: init project docs, sync on delivery events, and maintain reusable issue-solution knowledge.",
+  "author": {
+    "name": "Ihor Bazyliuk"
+  },
+  "homepage": "https://github.com/funkynine/obsidian-documentation",
+  "repository": "https://github.com/funkynine/obsidian-documentation",
+  "license": "MIT",
+  "keywords": [
+    "obsidian",
+    "documentation",
+    "architecture",
+    "claude-plugin",
+    "git-hooks"
+  ]
+}
